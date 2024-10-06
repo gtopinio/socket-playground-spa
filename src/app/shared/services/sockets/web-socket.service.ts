@@ -3,7 +3,6 @@ import { SocketDTO } from "../../models";
 import { CompatClient, Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import * as library from "../../library";
-import * as models from "../../models";
 import { BehaviorSubject, Subject } from "rxjs";
 
 @Injectable({
@@ -24,7 +23,7 @@ export class WebSocketService {
     this.stompClient.connect({}, () => {
       this.connectionStatus.next(true);
       console.log('WebSocket connection established');
-      this.stompClient.subscribe('/topic/' + socketDTO.socketRoomId, (response) => {
+      this.stompClient.subscribe(library.STOMP_TOPIC + socketDTO.socketRoomId, (response) => {
         const socketResponse = JSON.parse(response.body)
         this.socketSubject.next(socketResponse);
       })

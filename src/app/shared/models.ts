@@ -13,7 +13,7 @@ export type SocketMessage = {
 }
 
 export type SocketDTO = {
-  socketMessage?: SocketMessage;
+  socketMessage?: string;
   senderUsername?: string;
   receiverUsername?: string;
   senderSocketId?: string;

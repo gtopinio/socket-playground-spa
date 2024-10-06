@@ -23,15 +23,9 @@ export class SocketPlaygroundComponent {
       senderUsername: socketUsername,
       senderSocketId: senderSocketId,
       messageType: models.MessageType.JOIN,
-      socketMessage: {
-        content: library.STOMP_MESSAGE_JOIN,
-        senderUsername: socketUsername,
-        senderSocketId: senderSocketId,
-        socketRoomId: this.genericSocketRoomId,
-        type: models.MessageType.MESSAGE
-      },
+      socketMessage: library.STOMP_MESSAGE_JOIN,
       socketRoomId: this.genericSocketRoomId,
-      isForMultipleUsers: false
+      isForMultipleUsers: true
     };
   }
 }

@@ -1,10 +1,35 @@
 <div class="w-full h-full flex">
   <div class="w-full h-full mt-4 mx-2 p-5 bg-white rounded-lg shadow-lg">
     <div class="flex justify-between items-center">
-      <h1 class="text-2xl font-bold">{{ socketUserUsername }}</h1>
-      <button class="bg-green-600 text-white px-4 py-2 rounded-lg" (click)="testConnection()">
-        Test Connection
+      <div class="flex items-center space-x-4">
+        <h1 class="text-2xl font-bold">{{ socketUserUsername }}</h1>
+        <button *ngIf="socketConnectionObservable" class="bg-red-600 text-white px-4 py-2 rounded-lg" (click)="leaveConnection()">
+          Leave
+        </button>
+      </div>
+      <button *ngIf="!socketConnectionObservable" class="bg-green-600 text-white px-4 py-2 rounded-lg" (click)="joinConnection()">
+        Join Connection
       </button>
+      <div *ngIf="socketConnectionObservable" class="flex items-center space-x-2">
+        <div class="flex flex-col">
+          <div class="flex items-center space-x-2">
+            <span class="text-green text-lg">Connected</span>
+            <input type="text" class="border-2 border-green-600 rounded-lg p-2" [(ngModel)]="socketMessage" />
+            <button class="bg-green-600 text-white px-4 py-2 rounded-lg" (click)="sendMessage()">
+              Send
+            </button>
+          </div>
+
+          <div class="flex flex-col mt-2 bg-gray-100 p-2 rounded-lg">
+            <span class="text-lg font-bold text-center justify-center text-gray-500">Messages</span>
+            <div *ngFor="let message of socketMessages" class="flex items-center space-x-2">
+              <span class="text-green text-lg font-bold">{{ message.senderUsername }}:</span>
+              <span class="text-sm">{{ message.content }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

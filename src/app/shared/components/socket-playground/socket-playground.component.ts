@@ -11,6 +11,7 @@ import * as library from "../../library";
 })
 export class SocketPlaygroundComponent {
   genericSocketRoomId = uuidv4();
+  senderSocketId = uuidv4();
 
   constructor(
   ) { }
@@ -18,10 +19,10 @@ export class SocketPlaygroundComponent {
   generateJoinSocketDTO(
     socketUsername: string,
   ) : SocketDTO {
-    const senderSocketId = uuidv4();
+
     return {
       senderUsername: socketUsername,
-      senderSocketId: senderSocketId,
+      senderSocketId: this.senderSocketId,
       messageType: models.MessageType.JOIN,
       socketMessage: library.STOMP_MESSAGE_JOIN,
       socketRoomId: this.genericSocketRoomId,

@@ -1,7 +1,8 @@
 export enum MessageType {
   JOIN = 'JOIN',
   LEAVE = 'LEAVE',
-  MESSAGE = 'MESSAGE'
+  MESSAGE = 'MESSAGE',
+  PING = 'PING'
 }
 
 export type SocketMessage = {

@@ -14,7 +14,13 @@
         <div class="flex flex-col">
           <div class="flex items-center space-x-2">
             <span class="text-green text-lg">Connected</span>
-            <input type="text" class="border-2 border-green-600 rounded-lg p-2" [(ngModel)]="socketMessage" />
+            <input
+              type="text"
+              class="border-2 border-green-600 rounded-lg p-2"
+              (ngModelChange)="onInputChange()"
+              [(ngModel)]="socketMessage"
+              (keydown.enter)="sendMessage()"
+            />
             <button class="bg-green-600 text-white px-4 py-2 rounded-lg" (click)="sendMessage()">
               Send
             </button>
@@ -23,8 +29,13 @@
           <div class="flex flex-col mt-2 bg-gray-100 p-2 rounded-lg">
             <span class="text-lg font-bold text-center justify-center text-gray-500">Messages</span>
             <div *ngFor="let message of socketMessages" class="flex items-center space-x-2">
-              <span class="text-green text-lg font-bold">{{ message.senderUsername }}:</span>
-              <span class="text-sm">{{ message.content }}</span>
+              <ng-container *ngIf="message.type === MessageType.MESSAGE">
+                <span class="text-green text-lg font-bold">{{ message.senderUsername }}:</span>
+                <span class="text-sm">{{ message.content }}</span>
+              </ng-container>
+              <ng-container *ngIf="message.type === MessageType.PING">
+                <span class="text-sm font-bold text-gray-600">{{ message.content }}</span>
+              </ng-container>
             </div>
           </div>
         </div>

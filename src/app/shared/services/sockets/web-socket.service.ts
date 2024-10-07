@@ -4,7 +4,13 @@ import { CompatClient, Stomp } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import * as library from "../../library";
 import { Observable, Subject } from "rxjs";
-import { STOMP_SOCKET_SEND_CHAT_MESSAGE } from "../../library";
+
+/**
+ * For future convenience, in case developer has forgotten how STOMP in Angular is integrated:
+ * The user should connect and subscribe to the STOMP client first before sending messages.
+ * Once connected, make sure to return the observable from the STOMP client's subscribe method.
+ * This observable will be used to listen to incoming messages.
+ */
 
 @Injectable({
   providedIn: 'root'
